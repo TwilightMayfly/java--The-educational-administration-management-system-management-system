@@ -46,7 +46,7 @@ public class Student extends User {
     }
 
     public static void selectCourse() {
-
+        System.out.println("1");
     }
 
     public void show() {
