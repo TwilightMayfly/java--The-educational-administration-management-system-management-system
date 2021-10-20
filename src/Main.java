@@ -1,7 +1,3 @@
-import javax.xml.bind.ValidationEvent;
-import java.util.Scanner;
-import java.util.Vector;
-
 /*作业：在两次实验内容和工程的基础上实现学生选课系统，具体要求如下：
         1. 系统分为管理员（唯一一个），教师，学生三类用户，实现其三者的登录功能（验证密码）。
         2. 管理员包括功能：添加课程、删除课程、按照选课人数排序，显示课程清单，修改授课教师，显示学生列表、
@@ -15,15 +11,15 @@ import java.util.Vector;
         7. 建立一个菜单，接收不同用户登录系统，并且提供不同用户的功能选择菜单。*/
 public class Main {
     public static void main(String[] args) {
-        Selection.readSelection();
-        UserCollection.readTeacher();
-        Courses.readCourse();
-        UserCollection.readStudent();
+        Selection.readSelection();//选课情况读入
+        UserCollection.readTeacher();//教师信息读入
+        Courses.readCourse();//课程信息读入
+        UserCollection.readStudent();//学生信息读入
         Menu m = new Menu();
         m.menu();//菜单
-        Courses.saveCourse();
-        UserCollection.saveStudent();
-        UserCollection.saveTeacher();
-        Selection.saveSelection();
+        Courses.saveCourse();//课程信息写入
+        UserCollection.saveStudent();//学生信息写入
+        UserCollection.saveTeacher();//教师信息写入
+        Selection.saveSelection();//选课情况写入
     }
 }

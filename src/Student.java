@@ -42,11 +42,36 @@ public class Student extends User {
                 }
             }
         }
-
     }
 
     public static void selectCourse() {
-        System.out.println("1");
+        for (Course u : Courses.courses) {
+            if (u.type == 1) {
+                int flag = 0;
+                for (Selection v : Selection.select) {
+                    if (u.id == v.classId && v.stuId == sId) flag++;
+                }
+                if (flag == 0) u.show();
+            }
+        }
+        Scanner sc = new Scanner(System.in);
+        int courseId = sc.nextInt();
+        int t = 0;
+        for (Course u : Courses.courses) {
+
+            if (u.id == courseId) {
+                if (u.sNum >= ((ElectiveCourses) u).maxNum) {
+                    System.out.println("该科已满，无法选择");
+                } else {
+                    t = u.teaId;
+                    u.sNum++;
+                    Selection.select.add(new Selection(courseId, sId, t));
+                }
+
+            }
+        }
+
+
     }
 
     public void show() {

@@ -10,9 +10,19 @@ public class Courses {
     //添加课程
     public void addcourse() {
         Scanner sc = new Scanner(System.in);
-
-        Course a = new Course(courses.size() + 1, sc.next(), sc.nextInt(), sc.nextInt(), sc.nextInt());
-        courses.add(a);
+        String name = sc.next();
+        int type = sc.nextInt();
+        int tid = sc.nextInt();
+        //不同类型的课程会有不同的构造
+        if (type == 0) {
+            System.out.println("请输入该课程学分");
+            Course a = new RequiredCourse(courses.size() + 1, name, type, tid, UserCollection.stu.size(), sc.nextInt());
+            courses.add(a);
+        } else {
+            System.out.println("请输入该课程最大人数");
+            Course a = new ElectiveCourses(courses.size() + 1, name, type, tid, 0, sc.nextInt());
+            courses.add(a);
+        }
     }
 
     //添加课程
@@ -28,6 +38,14 @@ public class Courses {
         }
     }
 
+    //显示课程
+    public void show(Vector<Course> a) {
+        for (Course u : a) {
+            u.show();
+        }
+    }
+
+
     //排序
     public void sort() {
         Vector<Course> cc = new Vector<>();
@@ -40,8 +58,7 @@ public class Courses {
             }
             cc.add(i);
         }
-        courses = cc;
-        show();
+        show(cc);
     }
 
     //修改任课教师
@@ -52,15 +69,20 @@ public class Courses {
         int a = sc.nextInt();
         System.out.println("请输入要改为的教师id");
         int b = sc.nextInt();
+        int flag = 0;
         for (Course u : courses) {
             if (u.id == a) {
                 u.teaId = b;
                 for (Teacher v : UserCollection.tea) {
-                    if (v.workId == b) u.teacher = v.name;
+                    if (v.workId == b) {
+                        u.teacher = v.name;
+                        flag++;
+                    }
                 }
             }
         }
-        show();
+        if (flag == 0) System.out.println("课程id或教师id输入错误！");
+        else show();
     }
 
     //删除

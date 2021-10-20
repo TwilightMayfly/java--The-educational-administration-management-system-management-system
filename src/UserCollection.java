@@ -27,12 +27,17 @@ public class UserCollection {
             System.out.println("请输入要删除的学生学号");
             Scanner sc = new Scanner(System.in);
             int a = sc.nextInt();
-            Iterator<Student> iterator = stu.iterator();
-            while (iterator.hasNext()) {
-                Student next = iterator.next();
-                if (next.id == a) {
-                    iterator.remove();
+            stu.removeIf(next -> next.id == a);
+            for (Selection u : Selection.select) {
+                if (u.stuId == a) {
+                    for (Course v : Courses.courses) {
+                        if (u.classId == v.id) v.sNum--;
+                    }
                 }
+            }
+            Selection.select.removeIf(u -> u.stuId == a);
+            for (Course u : Courses.courses) {
+                if (u.type == 0) u.sNum--;
             }
             showStudent();
         }
@@ -62,13 +67,14 @@ public class UserCollection {
             System.out.println("请输入要删除的教师教工号");
             Scanner sc = new Scanner(System.in);
             int a = sc.nextInt();
-            Iterator<Teacher> iterator = tea.iterator();
-            while (iterator.hasNext()) {
-                Teacher next = iterator.next();
-                if (next.workId == a) {
-                    iterator.remove();
+            int flag = 0;
+            for (Course u : Courses.courses) {
+                if (u.teaId == a) {
+                    flag++;
                 }
             }
+            if (flag == 0) tea.removeIf(next -> next.workId == a);
+            else System.out.println("该教师存在教授的课程，无法删除，若需删除，请先修改课程教师");
         }
     }
 

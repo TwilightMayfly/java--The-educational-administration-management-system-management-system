@@ -1,11 +1,11 @@
-import javax.swing.plaf.synth.SynthUI;
 import java.util.Scanner;
 
 public class Menu {
-
+    //菜单函数
     public void menu() {
         Scanner sc = new Scanner(System.in);
         System.out.println("请选择用户类型：1：管理员，2：学生，3：教师");
+        //用户类型选择
         switch (sc.nextInt()) {
             case 1:
                 Admin a = new Admin();
@@ -48,6 +48,7 @@ public class Menu {
         }
     }
 
+    //管理员菜单
     public void adminMenu() {
         Scanner sc = new Scanner(System.in);
         int model = 0;
@@ -55,7 +56,8 @@ public class Menu {
         UserCollection user = new UserCollection();
 
         boolean judge = true;
-        while (judge) {//检测程序是否结束
+        //检测程序是否结束
+        while (judge) {
             System.out.println("接下来做什么——0：退出，1：课程新增，2：课程删除，3：显示课程列表，4：按上课人数排序，5：修改任课教师，" +
                     "6：显示学生列表：7：显示教师列表，8：恢复初始密码，9：添加老师或学生，10：删除老师或学生");
             model = sc.nextInt();
@@ -66,7 +68,7 @@ public class Menu {
                 case 1://课程新增
                     int flag = 0;
                     do {
-                        System.out.println("依次输入名称，类型，教师，最大人数");
+                        System.out.println("依次输入名称，类型，教师教工号");
                         course.addcourse();
                         System.out.println("是否继续输入——0：否，1：是");
                         flag = sc.nextInt();
@@ -110,6 +112,7 @@ public class Menu {
         System.out.println("成功退出系统");
     }
 
+    //学生菜单
     public void studentMenu() {
         Scanner sc = new Scanner(System.in);
         int model = 0;
@@ -130,6 +133,7 @@ public class Menu {
                     Student.lookCourse();
                     break;
                 case 3:
+                    Student.selectCourse();
                     break;
                 default:
                     break;
