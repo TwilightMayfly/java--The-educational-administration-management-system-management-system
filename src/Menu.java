@@ -142,6 +142,7 @@ public class Menu {
         System.out.println("成功退出系统");
     }
 
+    //教师菜单
     public void teacherMenu() {
         Scanner sc = new Scanner(System.in);
         int model = 0;

@@ -82,7 +82,12 @@ public class Courses {
             }
         }
         if (flag == 0) System.out.println("课程id或教师id输入错误！");
-        else show();
+        else {
+            for (Selection u : Selection.select) {
+                if (u.classId == a) u.teaId = b;
+            }
+            show();
+        }
     }
 
     //删除
@@ -93,9 +98,7 @@ public class Courses {
             System.out.println("请输入要删除的课程序号");
             Scanner sc = new Scanner(System.in);
             int a = sc.nextInt();
-            for (Course u : courses) {
-                if (u.id == a) courses.remove(u);
-            }
+            courses.removeIf(u -> u.id == a);
             for (Course u : courses) {
                 if (u.id > a) u.id--;
             }

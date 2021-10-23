@@ -55,10 +55,10 @@ public class Student extends User {
             }
         }
         Scanner sc = new Scanner(System.in);
+        System.out.println("请输入要选课课程编码");
         int courseId = sc.nextInt();
         int t = 0;
         for (Course u : Courses.courses) {
-
             if (u.id == courseId) {
                 if (u.sNum >= ((ElectiveCourses) u).maxNum) {
                     System.out.println("该科已满，无法选择");
@@ -66,6 +66,7 @@ public class Student extends User {
                     t = u.teaId;
                     u.sNum++;
                     Selection.select.add(new Selection(courseId, sId, t));
+                    System.out.println("选课成功");
                 }
 
             }
@@ -91,7 +92,10 @@ public class Student extends User {
             String xpass2 = sc.next();
             if (xpass1.equals(xpass2) && xpass1.length() == 6) {
                 for (Student u : UserCollection.stu) {
-                    if (u.id == iid) u.pass = xpass1;
+                    if (u.id == iid) {
+                        u.pass = xpass1;
+                        System.out.println("修改成功");
+                    }
                 }
                 break;
             } else {
